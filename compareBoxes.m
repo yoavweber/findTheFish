@@ -20,16 +20,17 @@ height = low-top;
 resultBox = [left, top, width, height]
 answerBox = [left2, top2, width2, height2]
  
-figure,imshow(binaryImage)
-hold on
-rectangle('Position',[left, top, width, height],'EdgeColor','r','LineWidth',2)
-rectangle('Position',[left2, top2, width2, height2],'EdgeColor','g','LineWidth',2)
-%rectangle('Position',[cords(1), cords(2), cords(3), cords(4)],'EdgeColor','r','LineWidth',2)
+%%
+figure,imshow(binaryImage);
+hold on;
+rectangle('Position',[left, top, width, height],'EdgeColor','r','LineWidth',2);
+rectangle('Position',[left2, top2, width2, height2],'EdgeColor','g','LineWidth',2);
 
+%%
 
 intersectionArea = rectint(resultBox, answerBox); %If you don't have this function then write a simple one for yourself which calculates area of intersection of two rectangles.
 unionArea = (width2*height2)+(width*height)-intersectionArea;
-overlapArea = intersectionArea/unionArea
+overlapArea = intersectionArea/unionArea;
 
 
 
