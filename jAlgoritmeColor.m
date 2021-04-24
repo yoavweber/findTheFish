@@ -1,6 +1,5 @@
 
-function result = algoritme1(img)
-
+function result = jAlgoritmeColor(img)
 
 rMin = 0;
 rMax = 50;
@@ -26,7 +25,6 @@ end
 
 BW = binaryImg;
 BW = imfill(BW,'holes');
-% imshowpair(binaryImg,BW2,'montage')
 binaryImg = bwareaopen(BW, 50);
 
 

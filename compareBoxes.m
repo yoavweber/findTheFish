@@ -1,4 +1,4 @@
-function cords = compareBoxes(cords, cords2, binaryImage)
+function overlapArea = compareBoxes(cords, cords2, binaryImage)
 
 top2 = cords2(1);
 low2 = cords2(2);
@@ -17,22 +17,11 @@ right = cords(4);
 width = right-left;
 height = low-top;
 
-resultBox = [left, top, width, height]
-answerBox = [left2, top2, width2, height2]
- 
-%%
-figure,imshow(binaryImage);
-hold on;
-rectangle('Position',[left, top, width, height],'EdgeColor','r','LineWidth',2);
-rectangle('Position',[left2, top2, width2, height2],'EdgeColor','g','LineWidth',2);
+resultBox = [left, top, width, height];
+answerBox = [left2, top2, width2, height2];
 
-%%
-
-intersectionArea = rectint(resultBox, answerBox); %If you don't have this function then write a simple one for yourself which calculates area of intersection of two rectangles.
+intersectionArea = rectint(resultBox, answerBox);
 unionArea = (width2*height2)+(width*height)-intersectionArea;
 overlapArea = intersectionArea/unionArea;
-
-
-
 
 end

@@ -1,0 +1,25 @@
+clc
+clear all
+
+%filename = '015001_GH020034.MP4.jpg';
+
+
+
+dinfo = dir('assets/Testing/*.jpg');
+names_cell = {dinfo.name};
+
+
+
+for i=1:2
+    % get an image from the test set
+    filename = names_cell{i}
+    filePath = "assets/Testing/" + filename;
+    fishimage = imread(filePath);
+    
+    % compare the result 
+    algoResult = algoritme1(fishimage); % 
+    answerCords = getAnswerCords(filename);
+    result = compareBoxes(algoResult, algoResult, fishimage);
+end
+
+names_cell{1}

@@ -1,20 +1,25 @@
 clc
 clear all
 
-filename = '015001_GH020034.MP4.jpg';
+%filename = '015001_GH020034.MP4.jpg';
 
-filePath = "assets/Testing/" + filename;
-fishimage = imread(filePath);
 
-dinfo = dir('assets/Testing/');
+dinfo = dir('assets/Testing/*.jpg');
 names_cell = {dinfo.name};
 
+allResults = []; % array with all results
 
-for i=1:2
+for i=1:size(names_cell,2)
+    % get an image from the test set
+    filename = names_cell{i};
+    filePath = "assets/Testing/" + filename;
+    fishimage = imread(filePath);
     
-    algoResult = algoritme1(fishimage);
-    
+    % get the corder box and compare it with the answer borderbox
+    algoResult = jAlgoritmeColor(fishimage);
     answerCords = getAnswerCords(filename);
-    result = compareBoxes(algoResult, algoResult, fishimage);
-    
+    result = compareBoxes(algoResult, answerCords, fishimage);
+    allResults(end+1) = result;
 end
+
+allResults
