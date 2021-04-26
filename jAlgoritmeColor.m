@@ -1,5 +1,6 @@
 
 function result = jAlgoritmeColor(img)
+ 
 
 rMin = 0;
 rMax = 50;
@@ -27,13 +28,36 @@ BW = binaryImg;
 BW = imfill(BW,'holes');
 binaryImg = bwareaopen(BW, 50);
 
+% ----------------- object extraction ---------------------
+BW=bwareafilt(binaryImg,15);
+regions=regionprops(BW,'Image');
 
-highestPixle = findHighestPixel(binaryImg);
-lowerstPixle = findLowestPixel(binaryImg);
-leftPixle = findLeftPixel(binaryImg);
-rightPixle = findRightPixel(binaryImg);
+MaxNumberOfObjects = 15
 
-result = [highestPixle lowerstPixle leftPixle rightPixle];
+% objects with a small size would not be acknowledged
+ObjectTreshHold = 30
+
+newStruct = {}
+for k = 1 : MaxNumberOfObjects
+    if (size(regions(k).Image,1) > ObjectTreshHold &&   (size(regions(k).Image,2) > ObjectTreshHold))
+        newStruct{1,end + 1} = regions(k).Image
+    end
+end
+
+% -------------------------------------------
+maybeFishIndex = size(newStruct,2)
+
+result = zeros(maybeFishIndex,4) 
+for k = 1 : maybeFishIndex
+
+    highestPixle = findHighestPixel(newStruct{maybeFishIndex});
+    lowerstPixle = findLowestPixel(newStruct{maybeFishIndex});
+    leftPixle = findLeftPixel(newStruct{maybeFishIndex});
+    rightPixle = findRightPixel(newStruct{maybeFishIndex});
+
+    result(maybeFishIndex,:) = [highestPixle lowerstPixle leftPixle rightPixle];
+end
+
 
 end
 
