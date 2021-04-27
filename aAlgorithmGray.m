@@ -12,6 +12,15 @@ x=IB/255;
 
 BW = imbinarize(I,x);
 
+[counts,binLocations] = imhist(BW);
+S=counts(1)/(sum(counts)/100);
+while S>10
+    x=x-0.01;
+    BW = imbinarize(I,x);
+    [counts,binLocations] = imhist(BW);
+    S=counts(1)/(sum(counts)/100);
+end
+
 BW=bwareaopen(BW, 100);
 binaryImg = imcomplement(BW);
 binaryImg=bwareaopen(binaryImg, 5000);
