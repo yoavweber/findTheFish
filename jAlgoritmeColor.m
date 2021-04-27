@@ -28,34 +28,19 @@ BW = binaryImg;
 BW = imfill(BW,'holes');
 binaryImg = bwareaopen(BW, 50);
 
-% ----------------- object extraction ---------------------
-BW=bwareafilt(binaryImg,15);
-regions=regionprops(BW,'Image');
+possibleFish = getObjects(binaryImg);
 
-MaxNumberOfObjects = 15
+maybeFishIndex = size(possibleFish,2);
 
-% objects with a small size would not be acknowledged
-ObjectTreshHold = 30
-
-newStruct = {}
-for k = 1 : MaxNumberOfObjects
-    if (size(regions(k).Image,1) > ObjectTreshHold &&   (size(regions(k).Image,2) > ObjectTreshHold))
-        newStruct{1,end + 1} = regions(k).Image
-    end
-end
-
-% -------------------------------------------
-maybeFishIndex = size(newStruct,2)
-
-result = zeros(maybeFishIndex,4) 
+result = zeros(maybeFishIndex,4);
 for k = 1 : maybeFishIndex
 
-    highestPixle = findHighestPixel(newStruct{maybeFishIndex});
-    lowerstPixle = findLowestPixel(newStruct{maybeFishIndex});
-    leftPixle = findLeftPixel(newStruct{maybeFishIndex});
-    rightPixle = findRightPixel(newStruct{maybeFishIndex});
+    highestPixle = possibleFish(k).BoundingBox(1);
+    lowerstPixle =  possibleFish(k).BoundingBox(1) + possibleFish(k).BoundingBox(3);
+    leftPixle = possibleFish(k).BoundingBox(2);
+    rightPixle =  possibleFish(k).BoundingBox(2) + possibleFish(k).BoundingBox(4);
 
-    result(maybeFishIndex,:) = [highestPixle lowerstPixle leftPixle rightPixle];
+    result(k,:) = [highestPixle lowerstPixle leftPixle rightPixle];
 end
 
 
