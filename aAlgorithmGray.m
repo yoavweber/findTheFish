@@ -15,6 +15,9 @@ BW = imbinarize(I,x);
 [counts,binLocations] = imhist(BW);
 S=counts(1)/(sum(counts)/100);
 while S>10
+    if S>20
+        x=x-0.01*(S-10)/5; %for speed
+    end
     x=x-0.01;
     BW = imbinarize(I,x);
     [counts,binLocations] = imhist(BW);
