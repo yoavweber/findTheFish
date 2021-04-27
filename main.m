@@ -8,7 +8,7 @@ names_cell = {dinfo.name};
 allResults = []; % array with all results
 
 %size(names_cell,2)
-for i=10:12
+for i=1:14
     % get an image from the test set
     filename = names_cell{i};
     filePath = "assets/Testing/" + filename;
