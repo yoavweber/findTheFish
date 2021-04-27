@@ -18,14 +18,18 @@ for i=1:size(names_cell,2)
     % get the corder box and compare it with the answer borderbox
     algoResult = jAlgoritmeColor(fishimage);
     answerCords = getAnswerCords(filename);
-
-    res = []
-    for k=1:size(algoResult,2)
-       res(end + 1) = compareBoxes(algoResult(k,:), answerCords, fishimage)
+    
+    if size(algoResult,1) == 0
+         allResults(end+1) = 0;
+    else
+        res = [];
+        for k=1:size(algoResult,1)
+           res(end + 1) = compareBoxes(algoResult(k,:), answerCords, fishimage);
+        end
+        %result = compareBoxes(algoResult, answerCords, fishimage);
+        allResults(end+1) = max(res);
     end
-
-    result = compareBoxes(algoResult, answerCords, fishimage);
-    allResults(end+1) = max(res);
 end
 
+res
 allResults
