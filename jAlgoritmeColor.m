@@ -28,24 +28,9 @@ BW = binaryImg;
 BW = imfill(BW,'holes');
 binaryImg = bwareaopen(BW, 50);
 
-possibleFish = getObjects(binaryImg);
-
-maybeFishIndex = size(possibleFish,2);
-
-result = zeros(maybeFishIndex,4);
-for k = 1 : maybeFishIndex
-
-    highestPixle = possibleFish(k).BoundingBox(1);
-    lowerstPixle =  possibleFish(k).BoundingBox(1) + possibleFish(k).BoundingBox(3);
-    leftPixle = possibleFish(k).BoundingBox(2);
-    rightPixle =  possibleFish(k).BoundingBox(2) + possibleFish(k).BoundingBox(4);
-
-    result(k,:) = [highestPixle lowerstPixle leftPixle rightPixle];
-end
-
+result = binaryImg;
 
 end
-
 
 function result = isInRange(value, min, max) 
     result = false;

@@ -3,7 +3,7 @@ function newStruct = getObjects(bImg)
 BW=bwareafilt(bImg,15);
 regions=regionprops(BW,'Image','BoundingBox');
 
-MaxNumberOfObjects = size(regions,1)
+MaxNumberOfObjects = size(regions,1);
 % objects with a small size would not be acknowledged
 ObjectTreshHold = 30;
 
