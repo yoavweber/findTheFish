@@ -1,4 +1,4 @@
-function result = aAlgorithmGray(img)
+function result = aAlgorithmGray2(img)
 I = rgb2gray(img);
 
 %H = imhist(I);
