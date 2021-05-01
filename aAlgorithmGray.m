@@ -2,7 +2,7 @@ function result = aAlgorithmGray(img)
 I = rgb2gray(img);
 
 H = imhist(I);
-[M,Bval] = max(H);
+[~,Bval] = max(H);
 
 IB = 155 - Bval;
 if Bval>100
@@ -12,7 +12,7 @@ x=IB/255;
 
 BW = imbinarize(I,x);
 
-[counts,binLocations] = imhist(BW);
+[counts,~] = imhist(BW);
 S=counts(1)/(sum(counts)/100);
 while S>10
     if S>20
@@ -20,7 +20,7 @@ while S>10
     end
     x=x-0.01;
     BW = imbinarize(I,x);
-    [counts,binLocations] = imhist(BW);
+    [counts,~] = imhist(BW);
     S=counts(1)/(sum(counts)/100);
 end
 
@@ -28,12 +28,8 @@ BW=bwareaopen(BW, 100);
 binaryImg = imcomplement(BW);
 binaryImg=bwareaopen(binaryImg, 5000);
 
-highestPixle = findHighestPixel(binaryImg);
-lowerstPixle = findLowestPixel(binaryImg);
-leftPixle = findLeftPixel(binaryImg);
-rightPixle = findRightPixel(binaryImg);
 
-result = [highestPixle lowerstPixle leftPixle rightPixle];
+result = binaryImg;
 
 end
 
