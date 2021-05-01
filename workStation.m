@@ -1,11 +1,11 @@
-filePath = "assets/Testing/" + "011001_GH030034.MP4.jpg";
+filePath = "assets/Testing/" + "016001_GH030034.MP4.jpg";
 img = imread(filePath);
-algoResult = jAlgoritmeColor(img);
 
-imshow(algoResult);
+algoResult = jAlgoritmeColor(img);
+imshow(algoResult)
+
 
 if(checkIfBlankImage(algoResult))
-       
         result = 0;
 else 
     possibleFishes = getObjects(algoResult); % get all objects in binary image
@@ -14,4 +14,6 @@ else
     result = compareBoxes(algBoundingBox, answerBoundingBox, fishimage); % compare the result
 end
 
+
+showBoundingBox(img, algoResult, algBoundingBox)
 result

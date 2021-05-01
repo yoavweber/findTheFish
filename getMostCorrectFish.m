@@ -12,6 +12,8 @@ function result = getMostCorrectFish(possibleFish)
         widthHeightRatios(k) = possibleFish(k).BoundingBox(3) / possibleFish(k).BoundingBox(4);
     end
     
+    allResults
+    widthHeightRatios
     
     correctImageIndex = getHighestValueIndex(widthHeightRatios);
     
