@@ -26,14 +26,18 @@ for i=1:14
     end
     
     if(result <0.3)
-    filenames(end+1)= names_cell{i};
+        imshow(filePath)
+        filenames(end+1)= names_cell{i};
     end
 
     allResults(end+1) = result; %save the result
     %showBoundingBox(fishimage, algoResult, algBoundingBox)
 end
 
+% xlswrite('result.xlsx',allResults);
 % prints the results
 allResults
 
-filenames
+for i=1:size(filenames)
+    imshow(filenames{i})
+end

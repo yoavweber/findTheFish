@@ -1,6 +1,11 @@
 
+
+
 function result = jAlgoritmeColor(img)
- 
+
+%img = 012001_GH030034.MP4-2.jpg
+
+
 
 rMin = 0;
 rMax = 50;
@@ -27,8 +32,10 @@ end
 BW = binaryImg;
 BW = imfill(BW,'holes');
 binaryImg = bwareaopen(BW, 50);
-
+binaryImg = imclose(binaryImg, true(9));
 result = binaryImg;
+
+
 
 end
 
