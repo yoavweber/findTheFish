@@ -6,7 +6,7 @@ dinfo = dir('assets/Testing/*.jpg');
 names_cell = {dinfo.name};
 
 allResults = []; % array with all results
-
+filenames = string(char); %array with filenames of "blank" pictures
 %size(names_cell,2)
 for i=1:14
     % get an image from the test set
@@ -25,6 +25,9 @@ for i=1:14
         result = compareBoxes(algBoundingBox, answerBoundingBox, fishimage); % compare the result
     end
     
+    if(result <0.3)
+    filenames(end+1)= names_cell{i};
+    end
 
     allResults(end+1) = result; %save the result
     %showBoundingBox(fishimage, algoResult, algBoundingBox)
@@ -32,3 +35,5 @@ end
 
 % prints the results
 allResults
+
+filenames
