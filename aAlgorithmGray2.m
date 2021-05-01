@@ -26,8 +26,9 @@ BW = imbinarize(I,x);
 %    S=counts(1)/(sum(counts)/100);
 %end
 
-BW=bwareaopen(BW, 100);
-binaryImg = imcomplement(BW);
+BW = imfill(BW,'holes');
+binaryImg=bwareaopen(BW, 50);
+%binaryImg = imcomplement(BW);
 %binaryImg=bwareaopen(binaryImg, 5000);
 
 
