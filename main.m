@@ -26,8 +26,15 @@ for i=1:14
     end
     
     if(result <0.3)
-        imshow(filePath)
+        %imshow(filePath)
         filenames(end+1)= names_cell{i};
+        %{
+        reply = questdlg('Continue?','Continue', 'OK','Cancel', 'OK');
+            if strcmpi(reply, 'Cancel')
+            % Stop if canceled.
+            return;
+        end
+        %}
     end
 
     allResults(end+1) = result; %save the result
@@ -38,6 +45,8 @@ end
 % prints the results
 allResults
 
-for i=1:size(filenames)
-    imshow(filenames{i})
+for i=2:s
+    filePath = "assets/Testing/" + filenames(i);
+    fishimage = imread(filePath);
+    figure, imshow(fishimage) %opens all "bad" images
 end
