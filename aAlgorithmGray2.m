@@ -1,5 +1,7 @@
-function result = aAlgorithmGray2(img)
+function result = aAlgorithmGray2(img, isGreen)
 I = rgb2gray(img);
+
+%imshow(I);
 
 %H = imhist(I);
 %[~,Bval] = max(H);
@@ -8,11 +10,26 @@ I = rgb2gray(img);
 %if Bval>100
 %  IB = IB + 25;
 %end
-gMax=50;
 
-x=gMax/255;
+gMin=10;
+gMax=40;
+if isGreen
+    gMin=35;
+    gMax=100;
+end
 
-BW = imbinarize(I,x);
+
+%BW = imbinarize(I,x);
+
+BW = zeros(size(I,1),size(I,2));
+for y=1:size(I,1)
+    for x=1:size(I,2)
+        if(isInRange(I(y,x), gMin, gMax))
+            BW(y,x) = 1;
+        end
+    end
+end
+%imshow(imbinarize);
 
 %[counts,~] = imhist(BW);
 %S=counts(1)/(sum(counts)/100);
@@ -32,8 +49,17 @@ binaryImg=bwareaopen(BW, 50);
 %binaryImg=bwareaopen(binaryImg, 5000);
 
 
+%inverseGrayImage = imcomplement(binaryImg);
 result = binaryImg;
 
+end
+
+
+function result = isInRange(value, min, max) 
+    result = false;
+    if (min < value && value < max) 
+        result = true;
+    end 
 end
 
 

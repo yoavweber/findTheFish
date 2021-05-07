@@ -20,7 +20,12 @@ for i=1:size(names_cell,2)
     filePath = "assets/Testing/" + filename;
     fishimage = imread(filePath);
     
-    algoResult = jAlgoritmeColor(fishimage); % algoritme to create binary image
+    isGreen = false;
+    if(getAvarangeRed(fishimage) < 90)
+        isGreen = true;
+    end
+    
+    algoResult = jAlgoritmeColor(fishimage, isGreen); % algoritme to create binary image
     if(checkIfBlankImage(algoResult))
         result = 0;
     else 
@@ -31,7 +36,7 @@ for i=1:size(names_cell,2)
     end
     colorResults(i,:) = result; %save the result
     
-    algoResult = aAlgorithmGray2(fishimage); % algoritme to create binary image
+    algoResult = aAlgorithmGray2(fishimage, isGreen); % algoritme to create binary image
     if(checkIfBlankImage(algoResult))
         result = 0;
     else 
@@ -70,7 +75,6 @@ T = table(imageName ,colorResults, greyScaleResults);
 excelName = "results.xlsx";
 writetable(T,excelName,'Sheet',1,'Range','A:C');
 colorResults;
-
 
 [~,s]=size(filenames);
 for i=2:s

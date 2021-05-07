@@ -17,14 +17,9 @@ bMin = 0;
 bMax = 65;
 
 if(isGreen)
-    rMin = 25;
-    rMax = 90;
-
-    gMin = 55;
-    gMax = 100;
-
-    bMin = 10;
-    bMax = 75; 
+    
+    
+    
 end
 
 binaryImg = zeros(size(img,1),size(img,2));
